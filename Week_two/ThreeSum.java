@@ -15,13 +15,13 @@ public class ThreeSum {
             for (int j = i + 1; j <= n - 1; j ++) {
                 int tmp = input.get(j);
                 int count = hash.getOrDefault(tmp, 0);
-                hash.put(tmp, count + 1);
                 int other = -input.get(i)-tmp;
                 if (hash.containsKey(other)) {
                     for (int k = 0; k < hash.get(other); k++) {
                         System.out.println(input.get(i) + " " + tmp + " " + other);
                     }
                 }
+                hash.put(tmp, count + 1);
             }
         }
     }

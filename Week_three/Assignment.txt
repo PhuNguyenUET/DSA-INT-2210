@@ -1,0 +1,23 @@
+Assignment1: The number of ways to select 3 numbers from N numbers is 6C3, which, if we calculate it out, is N(N -1)(N - 2)/6
+Assignment5: a, N
+	b, 1
+	c, 1
+	d, 2N^3
+	e, 1
+	f, 2
+	g, 0
+Assignment6:  
+	a, NlgN
+	b, N
+	c, NlgN
+Assignment7: We will analyze the count() function, by order of growth, it will be O(N^3)
+Assignment13:
+	a, 40
+	b, 40
+	c, 8N + 56
+	d, 56
+	e, 56
+	f, 32
+	g, 8
+Assignment26: I will skip the theory proof and go straight to how I may implement it. So just take an array a[n]
+ and plug each entry into the given algorithm in the form of (k, k ^3) and wait for the result
