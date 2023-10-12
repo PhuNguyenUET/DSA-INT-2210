@@ -1,0 +1,4 @@
+With selection sort, it is possible to implement Linked List because the sorting algorithm mostly travels forwards with
+one insertion at the end of each inner loop to get to the correct position.
+But with insertion sort, it is a bad idea to use Linked List because the inner loop goes backwards with each iteration
+to insert, so a Linked List would simply be too costly to use.
