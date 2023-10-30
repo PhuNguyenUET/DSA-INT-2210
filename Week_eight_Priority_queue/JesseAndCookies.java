@@ -23,7 +23,13 @@ class PQ {
 
     public void insert(int key) {
         pq[++n] = key;
-        swim(n);
+        int k = n;
+        while (k > 1 && pq[k/2] > pq[k]) {
+            int tmp = pq[k];
+            pq[k] = pq[k/2];
+            pq[k/2] = tmp;
+            k = k/2;
+        }
     }
 
     public int delMin() {
@@ -32,7 +38,20 @@ class PQ {
         pq[1] = pq[n];
         pq[n] = tmp;
         n --;
-        sink(1);
+        int k = 1;
+        while (2 * k <= n) {
+            int j = 2 * k;
+            if (j < n && pq[j] > pq[j + 1]) {
+                j ++;
+            }
+            if (pq[k] < pq[j]) {
+                break;
+            }
+            int temp = pq[k];
+            pq[k] = pq[j];
+            pq[j] = temp;
+            k = j;
+        }
         pq[n + 1] = 0;
         return mn;
     }
@@ -43,31 +62,6 @@ class PQ {
 
     public int size() {
         return n;
-    }
-
-    private void swim(int k) {
-        while (k > 1 && pq[k/2] > pq[k]) {
-            int tmp = pq[k];
-            pq[k] = pq[k/2];
-            pq[k/2] = tmp;
-            k = k/2;
-        }
-    }
-
-    private void sink(int k) {
-        while (2 * k <= n) {
-            int j = 2 * k;
-            if (j < n && pq[j] > pq[j + 1]) {
-                j ++;
-            }
-            if (pq[k] < pq[j]) {
-                break;
-            }
-            int tmp = pq[k];
-            pq[k] = pq[j];
-            pq[j] = tmp;
-            k = j;
-        }
     }
 }
 
