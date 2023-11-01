@@ -1,6 +1,7 @@
-import java.util.Scanner;
+import java.util.*;
 
-public class QuickSortDumb {
+public class Solution {
+
     private static int partition (int[] a, int l, int h) {
         int pivot = a[h];
         int i = l;

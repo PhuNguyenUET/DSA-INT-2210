@@ -11,48 +11,47 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 class PQ {
-    private int[] pq;
-    private int n = 0;
-    public PQ(int capacity) {
-        pq = new int[capacity + 1];
+    private int pq[] = new int[10000000];
+    int size = 0;
+
+    private void exchange (int i, int j) {
+        int tmp = pq[i];
+        pq[i] = pq[j];
+        pq[j] = tmp;
     }
 
-    public boolean isEmpty() {
-        return n == 0;
-    }
-
-    public void insert(int key) {
-        pq[++n] = key;
-        int k = n;
-        while (k > 1 && pq[k/2] > pq[k]) {
-            int tmp = pq[k];
-            pq[k] = pq[k/2];
-            pq[k/2] = tmp;
-            k = k/2;
+    public void insert(int k) {
+        size ++;
+        pq[size] = k;
+        int tmp = size;
+        while (tmp > 1 && pq[tmp/2] > pq[tmp]) {
+            exchange(tmp, tmp/2);
+            tmp /= 2;
         }
     }
 
     public int delMin() {
         int mn = pq[1];
-        int tmp = pq[1];
-        pq[1] = pq[n];
-        pq[n] = tmp;
-        n --;
-        int k = 1;
-        while (2 * k <= n) {
-            int j = 2 * k;
-            if (j < n && pq[j] > pq[j + 1]) {
-                j ++;
+        exchange(1, size);
+        pq[size] = 0;
+        size --;
+
+        int tmp = 1;
+
+        while(2 * tmp <= size) {
+            int smaller;
+            if (2 * tmp + 1 <= size && pq[2 * tmp] > pq[2 * tmp + 1]) {
+                smaller = 2 * tmp + 1;
+            } else {
+                smaller = 2 * tmp;
             }
-            if (pq[k] < pq[j]) {
+            if (pq[tmp] < pq[smaller]) {
                 break;
             }
-            int temp = pq[k];
-            pq[k] = pq[j];
-            pq[j] = temp;
-            k = j;
+            exchange(tmp, smaller);
+            tmp = smaller;
         }
-        pq[n + 1] = 0;
+
         return mn;
     }
 
@@ -61,7 +60,7 @@ class PQ {
     }
 
     public int size() {
-        return n;
+        return size ;
     }
 }
 
@@ -76,7 +75,7 @@ class PQ {
 class Result {
     public static int cookies(int k, List<Integer> A) {
         // Write your code here
-        PQ pq = new PQ(A.size());
+        PQ pq = new PQ();
         for (int i = 0; i < A.size(); i++) {
             pq.insert(A.get(i));
         }
