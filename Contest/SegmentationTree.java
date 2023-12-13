@@ -34,10 +34,10 @@ public class SegmentationTree {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int m = sc.nextInt();
         for (int i = 0; i < n; i++) {
             lst.add(sc.nextInt());
         }
+        int m = sc.nextInt();
         build(1, n, 1);
         for (int i = 1; i <= m; i++) {
             int l, r;
